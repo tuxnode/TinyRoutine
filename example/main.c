@@ -21,13 +21,10 @@ int main(void) {
     int t0 = uthread_creat(foo);
     int t1 = uthread_creat(bar);
 
-    printf("[main] created thread %d and %d\n", t0, t1);
+    printf("[main] created thread %d and %d, starting scheduler\n", t0, t1);
 
-    for (int i = 0; i < 4; i++) {
-        printf("[main] iteration %d\n", i);
-        uthread_yield();
-    }
+    schedule();
 
-    printf("[main] done\n");
+    printf("[main] back to main, done\n");
     return 0;
 }
