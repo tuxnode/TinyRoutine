@@ -11,7 +11,7 @@ void thread_entry() {
   void (*func)(void);
 
   // 取出函数指针
-  __asm__("mov %0, rbx" : "=r"(func));
+  __asm__("movq %%rbx, %0" : "=r"(func));
 
   func();
 
@@ -34,15 +34,15 @@ int uthread_creat(void (*func)(void)) {
 
   TCB *t = &thread_table[id];
   t->id = id;
+  free(t->stack);
   t->stack = malloc(STACK_SIZE);
 
   uint64_t *sp = (uint64_t *) (t->stack + STACK_SIZE);
+  sp--;
   sp = (uint64_t *)((uintptr_t)sp & ~0xFUL);  // 16字节对齐
 
-  sp--;
   *sp = (uint64_t) thread_entry;
 
-  // Init Registers
   t->ctx.rsp = (uint64_t) sp;
   t->ctx.rbp = (uint64_t) sp;
   t->ctx.rbx = (uint64_t) func;

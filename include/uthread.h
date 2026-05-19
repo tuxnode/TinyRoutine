@@ -1,3 +1,6 @@
+#ifndef UTHREAD_H
+#define UTHREAD_H
+
 #include <stdint.h>
 
 #define STACK_SIZE (64 * 1024)
@@ -33,3 +36,5 @@ void thread_entry();
 void schedule();
 int uthread_creat(void (*func)(void));
 void uthread_yield();
+
+#endif
