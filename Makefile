@@ -1,4 +1,4 @@
-.PHONY: all clean lib example
+.PHONY: all clean lib example run
 
 CC      = gcc
 CFLAGS := -Wall -Wextra -Werror -Wpedantic -O0 -g
@@ -16,7 +16,9 @@ LIB_OBJS  = $(BUILD_DIR)/uthread.o \
 EXAMPLE_SRC = example/main.c
 EXAMPLE_BIN = $(BUILD_DIR)/example
 
-all: $(LIB)
+all: $(EXAMPLE_BIN)
+
+lib: $(LIB)
 
 lib: $(LIB)
 
@@ -41,6 +43,9 @@ $(EXAMPLE_BIN): $(EXAMPLE_SRC) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $< -L$(BUILD_DIR) -luthread -static
 
 example: $(EXAMPLE_BIN)
+
+run: $(EXAMPLE_BIN)
+	./$(EXAMPLE_BIN)
 
 # --- clean ---
 clean:
