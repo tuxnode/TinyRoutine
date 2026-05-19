@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include "uthread.h"
+
+void foo(void) {
+    for (int i = 0; i < 5; i++) {
+        printf("  [foo] iteration %d\n", i);
+        uthread_yield();
+    }
+    printf("  [foo] done\n");
+}
+
+void bar(void) {
+    for (int i = 0; i < 3; i++) {
+        printf("  [bar] iteration %d\n", i);
+        uthread_yield();
+    }
+    printf("  [bar] done\n");
+}
+
+int main(void) {
+    int t0 = uthread_creat(foo);
+    int t1 = uthread_creat(bar);
+
+    printf("[main] created thread %d and %d\n", t0, t1);
+
+    for (int i = 0; i < 4; i++) {
+        printf("[main] iteration %d\n", i);
+        uthread_yield();
+    }
+
+    printf("[main] done\n");
+    return 0;
+}
