@@ -1,0 +1,52 @@
+# 语言指定
+Language: C
+
+# 基于 LLVM 基础风格进行定制
+BasedOnStyle: LLVM
+
+# --- 缩进与 Tab 核心设置 ---
+# Linux 标准：必须使用制表符 (Tab)，且宽度为 8
+UseTab: Always
+TabWidth: 8
+IndentWidth: 8
+
+# 连续行的缩进宽度（如长表达式换行）
+ContinuationIndentWidth: 8
+
+# --- 布局限制 ---
+# 经典的 80 字符单行限制
+ColumnLimit: 80
+
+# --- 大括号换行风格 ---
+# 关键字（if, while, for等）后的左大括号不换行 (Attach)
+# 函数定义的左大括号也不换行
+BreakBeforeBraces: Linux
+
+# --- 空格处理 ---
+# 关键字（if, for, while）后面必须有空格
+SpaceBeforeParens: ControlStatements
+
+# 指针和引用的星号靠右对齐 (例如: int *ptr;)
+PointerAlignment: Right
+
+# 赋值运算符两边有空格
+SpaceBeforeAssignmentOperators: true
+
+# --- 特殊情况处理 ---
+# 禁止将短的块或函数放在单行
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# Switch 语句中的 case 标签不缩进（与 switch 对齐）
+IndentCaseLabels: false
+
+# 预处理指令（#if, #define）不缩进
+IndentPPDirectives: None
+
+# 结构体/集合初始化列表对齐
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+
